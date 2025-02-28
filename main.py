@@ -4,7 +4,6 @@ import instaloader
 from telegram import Update, InlineKeyboardButton, InlineKeyboardMarkup
 from telegram.ext import ApplicationBuilder, CommandHandler, MessageHandler, CallbackQueryHandler, filters, CallbackContext
 from datetime import datetime
-import os
 from dotenv import load_dotenv
 
 # .env faylni yuklash
