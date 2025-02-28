@@ -4,9 +4,14 @@ import instaloader
 from telegram import Update, InlineKeyboardButton, InlineKeyboardMarkup
 from telegram.ext import ApplicationBuilder, CommandHandler, MessageHandler, CallbackQueryHandler, filters, CallbackContext
 from datetime import datetime
+from dotenv import load_dotenv
 
+# .env faylni yuklash
+load_dotenv()
+
+# Tokenni olish
+TOKEN = os.getenv("BOT_TOKEN")
 # Bot tokenini shu yerga yozing
-TOKEN = '6007628582:AAGJwalvAOTKL6eLXutJgJcSPJM9UNi6VJM'
 
 # Foydalanuvchi xizmat sanog'ini saqlash
 USER_LIMIT = 1_000_000
@@ -188,7 +193,7 @@ async def start(update: Update, context: CallbackContext):
     reply_markup = InlineKeyboardMarkup(keyboard)
     await update.message.reply_text(
         f"*Assalomu alaykum va rohmatullohi va barokatuh\\!* 🌿\n"
-        f"👤 *Hurmatli {user.first_name}*, Botimizga Xush kelibsiz\\!👋 \n"
+        f"👤 *Hurmatli {user.first_name}*, Botimizga Xush kelibsiz!👋 \n"
         f"🆔 *Raqamingiz:* `{user.id}`\n"
         f"🤖 *Bot yaratuvchisi:* [Husanbek Suyunov](https://husanbek-coder.uz)\n"
         f"📹 *YouTube sahifamizga obuna bo'ling:* [📺 YouTube Kanalimiz](https://www.youtube.com/@it_creative)\n"
