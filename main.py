@@ -4,9 +4,15 @@ import instaloader
 from telegram import Update, InlineKeyboardButton, InlineKeyboardMarkup
 from telegram.ext import ApplicationBuilder, CommandHandler, MessageHandler, CallbackQueryHandler, filters, CallbackContext
 from datetime import datetime
+import os
+from dotenv import load_dotenv
 
+# .env faylni yuklash
+load_dotenv()
+
+# Tokenni olish
+TOKEN = os.getenv("BOT_TOKEN")
 # Bot tokenini shu yerga yozing
-TOKEN = '7910397008:AAFKMo6TVxHN7GFF1MrbORytkf-bjfIdsAw'
 
 # Foydalanuvchi xizmat sanog'ini saqlash
 USER_LIMIT = 1_000_000

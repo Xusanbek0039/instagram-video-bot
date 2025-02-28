@@ -1,2 +1,3 @@
 instaloader
 requests
+dotenv
