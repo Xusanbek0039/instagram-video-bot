@@ -213,11 +213,25 @@ async def button_handler(update: Update, context: CallbackContext):
         await query.message.reply_text(f"📊 Sizning bugungi foydalangan limitingiz: {used_limit}")
     elif query.data == "about":
         await query.message.reply_text("ℹ️ Biz haqimizda: Bu bot Instagram reels videolarini yuklab olish uchun yaratilgan.\nBotni qayta ishga tushurish uchun /start")
-    elif query.data == "admin":
-        await query.message.reply_text("Admin bilan bog'lanish uchun:\n@mBin_Dev_0039 telegram manzil\n+998 97 521 66 86 A'loqa raqami orqali\nBog'lanishingiz mumkin.\nBotni qayta ishga tushurish uchun /start")
     elif query.data == "statistika":
         await statistikani_korsat(update, context)  # Statistika funktsiyasini chaqirish
     print(f"🔘Inline tugma bosildi: {query.data} | 👤Foydalanuvchi : {user.first_name} ID ({user.id})")  # Debug uchun
+
+
+async def admin_boglanish(update: Update, context: CallbackContext):
+    admin_text = (
+        "Admin bilan bog'lanish uchun:\n"
+        "@mBin_Dev_0039 telegram manzil\n"
+        "+998 97 521 66 86 A'loqa raqami orqali\n"
+        "Bog'lanishingiz mumkin.\n"
+        "Botni qayta ishga tushurish uchun /start"
+    )
+    
+    if update.callback_query:
+        await update.callback_query.message.reply_text(admin_text)
+    else:
+        await update.message.reply_text(admin_text)
+
 
 
 async def handle_message(update: Update, context: CallbackContext):
@@ -299,14 +313,16 @@ async def statistikani_korsat(update: Update, context: CallbackContext):
     total_users, total_requests, today_requests = get_statistics()
     
     statistikalar = (
-        "📊 *Bot statistikasi* 📊\n\n"
-        f"👤 Umumiy foydalanuvchilar: {total_users}\n"
-        f"📥 Jami so‘rovlar: {total_requests}\n"
-        f"📅 Bugungi so‘rovlar: {today_requests}\n"
+        "\U0001F4CA *Bot statistikasi* \U0001F4CA\n\n"
+        f"\U0001F464 Umumiy foydalanuvchilar: {total_users}\n"
+        f"\U0001F4E5 Jami so‘rovlar: {total_requests}\n"
+        f"\U0001F4C5 Bugungi so‘rovlar: {today_requests}\n"
     )
-
-    await update.callback_query.message.reply_text(statistikalar, parse_mode="Markdown")
-
+    
+    if update.callback_query:
+        await update.callback_query.message.reply_text(statistikalar, parse_mode="Markdown")
+    else:
+        await update.message.reply_text(statistikalar, parse_mode="Markdown")
 
 
 def log_message(message):
@@ -326,9 +342,11 @@ def main():
     
     application.add_handler(CommandHandler("start", start))
     application.add_handler(CommandHandler("statistika", statistikani_korsat))  
+    application.add_handler(CallbackQueryHandler(statistikani_korsat))
     application.add_handler(CallbackQueryHandler(button_handler))
     application.add_handler(MessageHandler(filters.TEXT & ~filters.COMMAND, handle_message))
-    
+    application.add_handler(CommandHandler("admin", admin_boglanish))
+    application.add_handler(CallbackQueryHandler(admin_boglanish, pattern="^admin$"))
     application.run_polling()
 
 
