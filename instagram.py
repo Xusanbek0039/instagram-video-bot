@@ -4,18 +4,13 @@ import instaloader
 from telegram import Update, InlineKeyboardButton, InlineKeyboardMarkup
 from telegram.ext import ApplicationBuilder, CommandHandler, MessageHandler, CallbackQueryHandler, filters, CallbackContext
 from datetime import datetime
-from dotenv import load_dotenv
 
-# .env faylni yuklash
-load_dotenv()
-
-# Tokenni olish
-TOKEN = os.getenv("BOT_TOKEN")
 # Bot tokenini shu yerga yozing
+TOKEN = '6007628582:AAGJwalvAOTKL6eLXutJgJcSPJM9UNi6VJM'
 
 # Foydalanuvchi xizmat sanog'ini saqlash
 USER_LIMIT = 1_000_000
-DAILY_LIMIT = 10
+DAILY_LIMIT = 20
 
 if not os.path.exists("counter.txt"):
     with open("counter.txt", "w") as f:
@@ -211,25 +206,39 @@ async def button_handler(update: Update, context: CallbackContext):
         used_limit, remaining_limit = check_user_limit(user_id, user.username, user.first_name, user.last_name)
         await query.message.reply_text(f"📊 Sizning bugungi foydalangan limitingiz: {used_limit}")
     elif query.data == "about":
-        await query.message.reply_text("ℹ️ Biz haqimizda: Bu bot Instagram reels videolarini yuklab olish uchun yaratilgan.\nBotni qayta ishga tushurish uchun /start")
+        await query.message.reply_text(
+            "📌 *Bu bot haqida:*\n"
+            "Bu bot Instagram reels videolarini tez va oson yuklab olish uchun yaratilgan. "
+            "Bizning maqsadimiz — foydalanuvchilarga eng qulay va tezkor xizmatni taqdim etish. "
+            "Botimiz orqali Instagram'dagi istalgan video yoki rasmlarni hech qanday qiyinchiliksiz yuklab olishingiz mumkin.\n\n"
+            
+            "📌 *Foydalanish bo‘yicha qo‘llanma:*\n"
+            "Instagram havolasini yuboring va bot sizga media faylni taqdim etadi.\n\n"
+            
+            "🌟 *Bizning kanallar:*\n"
+            "📢 *Telegram:* [IT Creative](https://t.me/it_creative_news)\n"
+            "📺 *YouTube:* [IT Creative](https://www.youtube.com/@it_creative)\n\n"
+            
+            "👨‍💻 *Admin bilan bog‘lanish:*\n"
+            "🔹 [@mBin_Dev_0039](https://t.me/mBin_Dev_0039)\n"
+            "☎️ *Telefon:* +998 97 521 66 86",
+            parse_mode="Markdown"
+        )
+
+    elif query.data == "admin":
+        await query.message.reply_text(
+            "📩 *Admin bilan bog‘lanish:*\n\n"
+            "👨‍💻 *Telegram:* [@mBin_Dev_0039](https://t.me/mBin_Dev_0039)\n"
+            "☎️ *Telefon:* +998 97 521 66 86\n\n"
+            "❓ Agar bot ishlamayotgan bo‘lsa yoki savollaringiz bo‘lsa, bemalol yozing.\n\n"
+            "🔄 *Botni qayta ishga tushurish uchun:* /start",
+            parse_mode="Markdown"
+        )
     elif query.data == "statistika":
         await statistikani_korsat(update, context)  # Statistika funktsiyasini chaqirish
     print(f"🔘Inline tugma bosildi: {query.data} | 👤Foydalanuvchi : {user.first_name} ID ({user.id})")  # Debug uchun
 
 
-async def admin_boglanish(update: Update, context: CallbackContext):
-    admin_text = (
-        "Admin bilan bog'lanish uchun:\n"
-        "@mBin_Dev_0039 telegram manzil\n"
-        "+998 97 521 66 86 A'loqa raqami orqali\n"
-        "Bog'lanishingiz mumkin.\n"
-        "Botni qayta ishga tushurish uchun /start"
-    )
-    
-    if update.callback_query:
-        await update.callback_query.message.reply_text(admin_text)
-    else:
-        await update.message.reply_text(admin_text)
 
 
 
@@ -265,7 +274,7 @@ async def handle_message(update: Update, context: CallbackContext):
             await update.message.reply_text("❌ Umumiy xizmat limiti tugagan.\nBotni qayta ishga tushurish uchun /start")
             return
 
-        await update.message.reply_text("⏳ Video yuklanmoqda... \nIltimos, biroz kuting.")
+        await update.message.reply_text("⏳ Media yuklanmoqda... \n▶️Iltimos, biroz kuting...\n⏳Bu bir necha soniya vaqt oladi!")
         video_content = download_instagram_video(text)
         if video_content:
             increment_user_limit(user.id, user.username, user.first_name, user.last_name)
@@ -276,52 +285,56 @@ async def handle_message(update: Update, context: CallbackContext):
             await update.message.reply_text(f"❌ Video yuklab olishda xatolik.\n#️⃣ Ariza raqami: {request_number} ")
     else:
         await update.message.reply_text(f"❌ Iltimos, faqat Instagram video havolasini yuboring.\nBotni qayta ishga tushurish uchun /start")
-
 def get_statistics():
     total_users = 0
     total_requests = 0
     today_requests = 0
+    successful_requests = 0
+    failed_requests = 0
     today = datetime.now().date()
 
     # Umumiy foydalanuvchilarni hisoblash
     if os.path.exists("user_limits.txt"):
         with open("user_limits.txt", "r") as f:
-            total_users = sum(1 for _ in f)  # Har bir qatorda bitta user
+            total_users = sum(1 for _ in f)
 
     # Umumiy so‘rovlar sonini hisoblash
     if os.path.exists("counter.txt"):
         with open("counter.txt", "r") as f:
             total_requests = int(f.read().strip())
 
-    # Bugungi so‘rovlarni hisoblash
-    if os.path.exists("user_limits.txt"):
-        with open("user_limits.txt", "r") as f:
+    # Bugungi muvaffaqiyatli va muvaffaqiyatsiz yuklangan videolarni hisoblash
+    if os.path.exists("baza.txt"):
+        with open("baza.txt", "r", encoding="utf-8") as f:
             for line in f:
-                parts = line.strip().split()
-                if len(parts) >= 4:
-                    date = datetime.strptime(parts[-1], "%Y-%m-%d").date()
-                    count = int(parts[-2])
-                    if date == today:
-                        today_requests += count
+                if "📅" in line and "⛽ Status:" in line:
+                    parts = line.strip().split(", ")
+                    date_str = parts[2].split("📅 ")[1].split(" ")[0]
+                    status = parts[3].split("⛽ Status: ")[1]
+                    log_date = datetime.strptime(date_str, "%Y-%m-%d").date()
+                    
+                    if log_date == today:
+                        today_requests += 1
+                        if "✅ Muvaffaqiyatli" in status:
+                            successful_requests += 1
+                        else:
+                            failed_requests += 1
 
-    return total_users, total_requests, today_requests
-
-
+    return total_users, total_requests, today_requests, successful_requests, failed_requests
 
 async def statistikani_korsat(update: Update, context: CallbackContext):
-    total_users, total_requests, today_requests = get_statistics()
+    total_users, total_requests, today_requests, successful_requests, failed_requests = get_statistics()
     
     statistikalar = (
-        "\U0001F4CA *Bot statistikasi* \U0001F4CA\n\n"
-        f"\U0001F464 Umumiy foydalanuvchilar: {total_users}\n"
-        f"\U0001F4E5 Jami so‘rovlar: {total_requests}\n"
-        f"\U0001F4C5 Bugungi so‘rovlar: {today_requests}\n"
+        "📊 *Bot statistikasi* 📊\n\n"
+        f"👤 Umumiy foydalanuvchilar: {total_users}\n"
+        f"📥 Jami so‘rovlar: {total_requests}\n"
+        f"📅 Bugungi so‘rovlar: {today_requests}\n\n"
+        f"✅ Bugun yuklangan muvaffaqiyatli videolar: {successful_requests}\n"
+        f"❌ Bugungi muvaffaqiyatsiz yuklamalar: {failed_requests}\n"
     )
-    
-    if update.callback_query:
-        await update.callback_query.message.reply_text(statistikalar, parse_mode="Markdown")
-    else:
-        await update.message.reply_text(statistikalar, parse_mode="Markdown")
+
+    await update.callback_query.message.edit_text(statistikalar, parse_mode="Markdown")
 
 
 def log_message(message):
@@ -341,11 +354,9 @@ def main():
     
     application.add_handler(CommandHandler("start", start))
     application.add_handler(CommandHandler("statistika", statistikani_korsat))  
-    application.add_handler(CallbackQueryHandler(statistikani_korsat))
     application.add_handler(CallbackQueryHandler(button_handler))
     application.add_handler(MessageHandler(filters.TEXT & ~filters.COMMAND, handle_message))
-    application.add_handler(CommandHandler("admin", admin_boglanish))
-    application.add_handler(CallbackQueryHandler(admin_boglanish, pattern="^admin$"))
+    
     application.run_polling()
 
 
