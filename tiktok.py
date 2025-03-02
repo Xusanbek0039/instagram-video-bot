@@ -12,7 +12,7 @@ def expand_tiktok_url(url):
         "User-Agent": "Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/91.0.4472.124 Safari/537.36"
     }
     try:
-        response = requests.get(url, allow_redirects=True, timeout=30, headers=headers)
+        response = requests.get(url, allow_redirects=True, timeout=30, headers=headers, verify=False)
         return response.url if response.status_code == 200 else url
     except requests.exceptions.RequestException as e:
         print(f"❌ URLni ochishda xatolik: {e}")
@@ -27,9 +27,9 @@ def download_tiktok_video(url):
         ydl_opts = {
             'format': 'best',
             'outtmpl': 'tiktok_video.mp4',
-            'socket_timeout': 30,
-            'noprogress': True,
-            'quiet': True
+            'socket_timeout': 60,
+            'noprogress': False,
+            'quiet': False
         }
         
         with yt_dlp.YoutubeDL(ydl_opts) as ydl:
