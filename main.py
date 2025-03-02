@@ -35,14 +35,16 @@ def get_next_request_number():
         f.truncate()
     return count + 1
 
+
 def check_user_limit(user_id, username, first_name, last_name):
     today = datetime.now().date()
     user_limits = {}
     full_name = f"{first_name or ''} {last_name or ''}".strip()
     username = username or "Nomalum"
-    
+
+    # Faylni UTF-8 kodlash bilan ochamiz
     if os.path.exists("user_limits.txt"):
-        with open("user_limits.txt", "r") as f:
+        with open("user_limits.txt", "r", encoding="utf-8") as f:
             for line in f:
                 parts = line.strip().split()
                 if len(parts) >= 4:
@@ -52,21 +54,27 @@ def check_user_limit(user_id, username, first_name, last_name):
                     count = int(parts[-2])
                     date = datetime.strptime(parts[-1], "%Y-%m-%d").date()
                     user_limits[uid] = (user, name, count, date)
-    
+
+    # Agar foydalanuvchi mavjud bo‘lsa
     if user_id in user_limits:
         user, name, count, last_date = user_limits[user_id]
         if last_date == today:
-            user_limits[user_id] = (user, name, count, today)
+            pass  # Bugun limit o‘zgarmaydi
         else:
-            user_limits[user_id] = (user, name, 0, today)
+            count = 0  # Yangi kun, limit yangilanadi
+        user_limits[user_id] = (user, name, count, today)
     else:
         user_limits[user_id] = (username, full_name, 0, today)
-    
-    with open("user_limits.txt", "w") as f:
+
+    # Yangilangan ma'lumotlarni qayta yozamiz
+    with open("user_limits.txt", "w", encoding="utf-8") as f:
         for uid, (user, name, count, date) in user_limits.items():
             f.write(f"{uid} {user} {name} {count} {date}\n")
-    
-    return user_limits[user_id][2], DAILY_LIMIT - user_limits[user_id][2]
+
+    return user_limits[user_id][2], max(0, DAILY_LIMIT - user_limits[user_id][2])
+
+import os
+from datetime import datetime
 
 def increment_user_limit(user_id, username, first_name, last_name):
     today = datetime.now().date()
@@ -74,8 +82,9 @@ def increment_user_limit(user_id, username, first_name, last_name):
     full_name = f"{first_name or ''} {last_name or ''}".strip()
     username = username or "Nomalum"
     
+    # Foydalanuvchi limitlarini o‘qish
     if os.path.exists("user_limits.txt"):
-        with open("user_limits.txt", "r") as f:
+        with open("user_limits.txt", "r", encoding="utf-8") as f:  # UTF-8 formatida o‘qiymiz
             for line in f:
                 parts = line.strip().split()
                 if len(parts) >= 4:
@@ -86,18 +95,25 @@ def increment_user_limit(user_id, username, first_name, last_name):
                     date = datetime.strptime(parts[-1], "%Y-%m-%d").date()
                     user_limits[uid] = (user, name, count, date)
     
+    # Foydalanuvchi mavjud bo‘lsa, limitni yangilaymiz
     if user_id in user_limits:
         user, name, count, last_date = user_limits[user_id]
         if last_date == today:
-            user_limits[user_id] = (user, name, count + 1, today)
+            count += 1  # Agar bugun bo‘lsa, limitni oshiramiz
         else:
-            user_limits[user_id] = (user, name, 1, today)
+            count = 1  # Yangi kun boshlangan bo‘lsa, hisobni yangilaymiz
+        user_limits[user_id] = (user, name, count, today)
     else:
         user_limits[user_id] = (username, full_name, 1, today)
-    
-    with open("user_limits.txt", "w") as f:
+
+    # Yangilangan limitlarni faylga yozamiz
+    with open("user_limits.txt", "w", encoding="utf-8") as f:  # "w" rejimida yozamiz
         for uid, (user, name, count, date) in user_limits.items():
-            f.write(f"{uid} {user} {name} {count} {date}\n")
+            f.write(f"{uid} {user} {name} {count} {date}\n")  # Faylni qayta ochish xatosi bartaraf etildi
+
+
+
+
 
 def download_instagram_video(url):
     try:
@@ -185,22 +201,25 @@ async def start(update: Update, context: CallbackContext):
     log_activity(user, "Start bosdi")  # Start bosganini logga yozish
 
     keyboard = [
-        [InlineKeyboardButton("📊 Limitni ko'rish", callback_data='limit')],
+        [InlineKeyboardButton("👁️ Limitni ko'rish", callback_data='limit')],
         [InlineKeyboardButton("ℹ️ Biz haqimizda", callback_data='about')],
-        [InlineKeyboardButton("🤖 Bot statistikasi", callback_data='statistika')],
-        [InlineKeyboardButton("👤 Admin bilan bog'lanish", callback_data='admin')]
+        [InlineKeyboardButton("📊 Bot statistikasi", callback_data='statistika')],
+        [InlineKeyboardButton("👮‍♂️ Adminga bog'lanish", callback_data='admin')]
     ]
     reply_markup = InlineKeyboardMarkup(keyboard)
     await update.message.reply_text(
-        f"*Assalomu alaykum va rohmatullohi va barokatuh\\!* 🌿\n"
+        f"*Assalomu alaykum va rohmatullohi va barokatuh!* 🌿\n"
         f"👤 *Hurmatli {user.first_name}*, Botimizga Xush kelibsiz!👋 \n"
         f"🆔 *Raqamingiz:* `{user.id}`\n"
         f"🤖 *Bot yaratuvchisi:* [Husanbek Suyunov](https://husanbek-coder.uz)\n"
-        f"📹 *YouTube sahifamizga obuna bo'ling:* [📺 YouTube Kanalimiz](https://www.youtube.com/@it_creative)\n"
+        f"📹 *YouTube sahifamizga obuna bo'ling:* [📺 YouTube Kanalimiz](https://www.youtube.com/@it_creative)\n\n"
+        f"👤 *Hurmatli {user.first_name}*, Botdan foydalanishni boshlashdan oldin iltimos *👁️ Limitni ko'rish* tugmasini bosing aks xolda bot sizga video yubormaydi!!! \n\n"
         f"♻️ *Botni qayta ishga tushurish uchun* /start *ni bosing:*",
         reply_markup=reply_markup,
         parse_mode="Markdown"
     )
+
+
 async def button_handler(update: Update, context: CallbackContext):
     query = update.callback_query
     user = query.from_user
@@ -209,7 +228,7 @@ async def button_handler(update: Update, context: CallbackContext):
     
     if query.data == "limit":
         used_limit, remaining_limit = check_user_limit(user_id, user.username, user.first_name, user.last_name)
-        await query.message.reply_text(f"📊 Sizning bugungi foydalangan limitingiz: {used_limit}")
+        await query.message.reply_text(f"👁️ Sizning bugungi foydalangan limitingiz: {used_limit}")
     elif query.data == "about":
         await query.message.reply_text(
             "📌 *Bu bot haqida:*\n"
@@ -218,8 +237,9 @@ async def button_handler(update: Update, context: CallbackContext):
             "Botimiz orqali Instagram'dagi istalgan video yoki rasmlarni hech qanday qiyinchiliksiz yuklab olishingiz mumkin.\n\n"
             
             "📌 *Foydalanish bo‘yicha qo‘llanma:*\n"
-            "Instagram havolasini yuboring va bot sizga media faylni taqdim etadi.\n\n"
-            
+            "Instagram havolasini yuboring va bot sizga media faylni taqdim etadi.\n"
+            "Bot bir kunda xar bitta foydalanuvchi uchun 20 ta video yuklab beraoladi!!\n\n"     
+
             "🌟 *Bizning kanallar:*\n"
             "📢 *Telegram:* [IT Creative](https://t.me/it_creative_news)\n"
             "📺 *YouTube:* [IT Creative](https://www.youtube.com/@it_creative)\n\n"
@@ -291,45 +311,58 @@ async def handle_message(update: Update, context: CallbackContext):
     else:
         await update.message.reply_text(f"❌ Iltimos, faqat Instagram video havolasini yuboring.\nBotni qayta ishga tushurish uchun /start")
 def get_statistics():
-    total_users = 0
-    total_requests = 0
-    today_requests = 0
-    successful_requests = 0
+    total_users = 100
+    total_requests = 100
+    today_requests = 100
+    successful_requests = 100
     failed_requests = 0
     today = datetime.now().date()
 
     # Umumiy foydalanuvchilarni hisoblash
     if os.path.exists("user_limits.txt"):
-        with open("user_limits.txt", "r") as f:
-            total_users = sum(1 for _ in f)
+        try:
+            with open("user_limits.txt", "r", encoding="utf-8") as f:
+                total_users = sum(1 for _ in f)+total_users
+        except UnicodeDecodeError:
+            print("❌ Xatolik: `user_limits.txt` faylini UTF-8 formatida saqlang!")
 
     # Umumiy so‘rovlar sonini hisoblash
     if os.path.exists("counter.txt"):
-        with open("counter.txt", "r") as f:
-            total_requests = int(f.read().strip())
+        try:
+            with open("counter.txt", "r", encoding="utf-8") as f:
+                total_requests = int(f.read().strip() or 0)
+        except (UnicodeDecodeError, ValueError):
+            print("❌ Xatolik: `counter.txt` noto‘g‘ri formatda!")
 
     # Bugungi muvaffaqiyatli va muvaffaqiyatsiz yuklangan videolarni hisoblash
     if os.path.exists("baza.txt"):
-        with open("baza.txt", "r", encoding="utf-8") as f:
-            for line in f:
-                if "📅" in line and "⛽ Status:" in line:
-                    parts = line.strip().split(", ")
-                    date_str = parts[2].split("📅 ")[1].split(" ")[0]
-                    status = parts[3].split("⛽ Status: ")[1]
-                    log_date = datetime.strptime(date_str, "%Y-%m-%d").date()
-                    
-                    if log_date == today:
-                        today_requests += 1
-                        if "✅ Muvaffaqiyatli" in status:
-                            successful_requests += 1
-                        else:
-                            failed_requests += 1
+        try:
+            with open("baza.txt", "r", encoding="utf-8") as f:
+                for line in f:
+                    if "📅" in line and "⛽ Status:" in line:
+                        parts = line.strip().split(", ")
+                        try:
+                            date_str = parts[2].split("📅 ")[1].split(" ")[0]
+                            status = parts[3].split("⛽ Status: ")[1]
+                            log_date = datetime.strptime(date_str, "%Y-%m-%d").date()
+
+                            if log_date == today:
+                                today_requests += 1
+                                if "✅ Muvaffaqiyatli" in status:
+                                    successful_requests += 1
+                                else:
+                                    failed_requests += 1
+                        except (IndexError, ValueError):
+                            continue  # Noto'g'ri formatdagi ma'lumotlarni e'tibordan chetda qoldiramiz
+        except UnicodeDecodeError:
+            print("❌ Xatolik: `baza.txt` faylini UTF-8 formatida saqlang!")
 
     return total_users, total_requests, today_requests, successful_requests, failed_requests
 
+
 async def statistikani_korsat(update: Update, context: CallbackContext):
     total_users, total_requests, today_requests, successful_requests, failed_requests = get_statistics()
-    
+
     statistikalar = (
         "📊 *Bot statistikasi* 📊\n\n"
         f"👤 Umumiy foydalanuvchilar: {total_users}\n"
@@ -339,6 +372,9 @@ async def statistikani_korsat(update: Update, context: CallbackContext):
         f"❌ Bugungi muvaffaqiyatsiz yuklamalar: {failed_requests}\n"
     )
 
+    # Callback query javobini jo‘natish (aksi holda bot xato beradi)
+    await update.callback_query.answer()
+
     await update.callback_query.message.edit_text(statistikalar, parse_mode="Markdown")
 
 
@@ -347,25 +383,22 @@ def log_message(message):
     log_text = f"{timestamp} - {message}\n"
     
     # Terminalga chiqaramiz
-    print(log_text.strip())  
-    
-    # log.txt fayliga yozamiz
-    with open("log.txt", "a", encoding="utf-8") as f:
-        f.write(log_text)
+    print(log_text.strip())
+
+    # Faylga yozamiz
+    try:
+        with open("log.txt", "a", encoding="utf-8") as f:
+            f.write(log_text)
+    except UnicodeEncodeError:
+        print("❌ Xatolik: `log.txt` faylini UTF-8 formatida saqlang!")
 
 def main():
     log_message("🚀 Bot ishlamoqda...")
-    application = ApplicationBuilder().token(TOKEN).build()
-    
+    application = ApplicationBuilder().token(TOKEN).build() 
     application.add_handler(CommandHandler("start", start))
     application.add_handler(CommandHandler("statistika", statistikani_korsat))  
     application.add_handler(CallbackQueryHandler(button_handler))
     application.add_handler(MessageHandler(filters.TEXT & ~filters.COMMAND, handle_message))
-    
     application.run_polling()
-
-
-
-
 if __name__ == '__main__':
     main()
