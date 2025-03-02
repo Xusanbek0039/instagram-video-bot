@@ -201,7 +201,7 @@ async def start(update: Update, context: CallbackContext):
     log_activity(user, "Start bosdi")  # Start bosganini logga yozish
 
     keyboard = [
-        [InlineKeyboardButton("👁️ Limitni ko'rish", callback_data='limit')],
+        [InlineKeyboardButton("👁️ Limitni ko'rish/olish", callback_data='limit')],
         [InlineKeyboardButton("ℹ️ Biz haqimizda", callback_data='about')],
         [InlineKeyboardButton("📊 Bot statistikasi", callback_data='statistika')],
         [InlineKeyboardButton("👮‍♂️ Adminga bog'lanish", callback_data='admin')]
@@ -214,7 +214,7 @@ async def start(update: Update, context: CallbackContext):
         f"🤖 *Bot yaratuvchisi:* [Husanbek Suyunov](https://husanbek-coder.uz)\n"
         f"📹 *YouTube sahifamizga obuna bo'ling:* [📺 YouTube Kanalimiz](https://www.youtube.com/@it_creative)\n\n"
         f"👤 *Hurmatli {user.first_name}*, Botdan foydalanishni boshlashdan oldin iltimos *👁️ Limitni ko'rish* tugmasini bosing aks xolda bot sizga video yubormaydi!!! \n\n"
-        f"♻️ *Botni qayta ishga tushurish uchun* /start *ni bosing:*",
+        f"♻️ *🤖Botni qayta ishga tushurish uchun* /start *ni bosing:*",
         reply_markup=reply_markup,
         parse_mode="Markdown"
     )
@@ -256,7 +256,7 @@ async def button_handler(update: Update, context: CallbackContext):
             "👨‍💻 *Telegram:* [@mBin_Dev_0039](https://t.me/mBin_Dev_0039)\n"
             "☎️ *Telefon:* +998 97 521 66 86\n\n"
             "❓ Agar bot ishlamayotgan bo‘lsa yoki savollaringiz bo‘lsa, bemalol yozing.\n\n"
-            "🔄 *Botni qayta ishga tushurish uchun:* /start",
+            "🔄 *🤖Botni qayta ishga tushurish uchun:* /start",
             parse_mode="Markdown"
         )
     elif query.data == "statistika":
@@ -286,30 +286,33 @@ async def handle_message(update: Update, context: CallbackContext):
         await update.message.reply_text("His tuyg'ularga berilmang!\nHavola yuboring!")
         return
     elif any(word in text.lower() for word in ["admin"]):
-        await update.message.reply_text("Admin bilan bog'lanish uchun:\n@mBin_Dev_0039 telegram manzil\n+998 97 521 66 86 A'loqa raqami orqali\nBog'lanishingiz mumkin.\nBotni qayta ishga tushurish uchun /start")
+        await update.message.reply_text("Admin bilan bog'lanish uchun:\n@mBin_Dev_0039 telegram manzil\n+998 97 521 66 86 A'loqa raqami orqali\nBog'lanishingiz mumkin.\n🤖Botni qayta ishga tushurish uchun /start")
         return
     if "instagram.com" in text:
         used_limit, remaining_limit = check_user_limit(user.id, user.username, user.first_name, user.last_name)
         if used_limit >= DAILY_LIMIT:
-            await update.message.reply_text(f"❌ Sizning bugungi xizmat limingiz tugadi. \nLimitlar {used_limit}/{DAILY_LIMIT}\nBotni qayta ishga tushurish uchun /start")
+            await update.message.reply_text(f"❌ Sizning bugungi xizmat limingiz tugadi. \nLimitlar {used_limit}/{DAILY_LIMIT}\n🤖Botni qayta ishga tushurish uchun /start")
             return
         
         request_number = get_next_request_number()
         if request_number is None:
-            await update.message.reply_text("❌ Umumiy xizmat limiti tugagan.\nBotni qayta ishga tushurish uchun /start")
+            await update.message.reply_text("❌ Umumiy xizmat limiti tugagan.\n🤖Botni qayta ishga tushurish uchun /start")
             return
 
         await update.message.reply_text("⏳ Media yuklanmoqda... \n▶️Iltimos, biroz kuting...\n⏳Bu bir necha soniya vaqt oladi!")
         video_content = download_instagram_video(text)
         if video_content:
             increment_user_limit(user.id, user.username, user.first_name, user.last_name)
-            await update.message.reply_video(video=video_content, caption=f"🔗 Havola: {text}\n#️⃣ Ariza raqami: {request_number}\nSizning qolgan kunlik limitingiz: {remaining_limit - 1}/{DAILY_LIMIT}\nbotni qayta ishga tushurish uchun /start")
+            await update.message.reply_video(video=video_content, caption=f"🔗 Havola: {text}\n#️⃣ Ariza raqami: {request_number}\n👁️Sizning qolgan kunlik limitingiz: {remaining_limit - 1}/{DAILY_LIMIT}\n🤖Botni qayta ishga tushurish uchun /start")
             save_to_file(f"{user.first_name or ''} {user.last_name or ''} @{user.username or 'Nomalum'}", user.id, text, True, request_number)
         else:
             save_to_file(f"{user.first_name or ''} {user.last_name or ''} @{user.username or 'Nomalum'}", user.id, text, False, request_number)
             await update.message.reply_text(f"❌ Video yuklab olishda xatolik.\n#️⃣ Ariza raqami: {request_number} ")
     else:
-        await update.message.reply_text(f"❌ Iltimos, faqat Instagram video havolasini yuboring.\nBotni qayta ishga tushurish uchun /start")
+        await update.message.reply_text(f"❌ Iltimos, faqat Instagram video havolasini yuboring.\n🤖Botni qayta ishga tushurish uchun /start")
+
+
+        
 def get_statistics():
     total_users = 100
     total_requests = 100
