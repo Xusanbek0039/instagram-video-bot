@@ -1,9 +1,9 @@
-5626042722 mBin_Dev_0039 husanbek-coder.uz 0 2025-03-04
+5626042722 mBin_Dev_0039 husanbek-coder.uz -999999846 2025-03-04
 1830768060 Nomalum Mahliyo Suyunova 1 2025-03-02
 7694635937 Nomalum Xolmirzayeva 1 2025-03-02
 6489000250 Dr_muxtor_ov Mirkomil Muxtorov 1 2025-03-02
 5984401505 IT_Creative . 20 2025-03-03
-6806661662 um1rzoqova7 um1rzoqova__ 20 2025-03-03
+6806661662 um1rzoqova7 um1rzoqova__ 0 2025-03-05
 5584056957 kamosh_1020 Ð¡ÑƒÑŽÐ½Ð¾Ð²Ð° ÐšÐ°Ð¼Ð¾Ð»Ð° 1 2025-03-02
 7937817795 Nomalum Bobur 0 2025-03-02
 7793907875 Nomalum Boriboyevad 0 2025-03-02
@@ -23,8 +23,8 @@
 5865779337 NoUsername Zuxriddin 1 2025-02-26
 7424844286 tabiba_01 ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½:) 0 2025-02-26
 5952080061 Nomalum Umida Suyunova 0 2025-03-02
-7035564849 Nomalum Sevara Ergasheva 721 prip 0 2025-03-02
-7568344998 Zahro_003 زھرو 3 2025-03-03
+7035564849 Nomalum Sevara Ergasheva 721 prip 3 2025-03-05
+7568344998 Zahro_003 زھرو 5 2025-03-05
 7245563316 anora_m1 𝓪𝓷𝓸𝓻𝓪 0 2025-03-02
 7245175792 ad1nka_o29 Qoʻziboyeva 0 2025-03-02
 7897742770 ad1nka_o229 Qoʻziboyeva💙 0 2025-03-02
