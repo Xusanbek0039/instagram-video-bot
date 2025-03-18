@@ -10,7 +10,7 @@ load_dotenv()
 TOKEN = os.getenv("BOT_TOKEN")
 
 # Xabar yuboriladigan foydalanuvchi ID sini bu yerda kiriting
-USER_ID = "1360061767"  # <-- Bu yerga o'z foydalanuvchi ID'ingizni yozing
+USER_ID = "5626042722"  # <-- Bu yerga o'z foydalanuvchi ID'ingizni yozing
 
 async def send_message_to_user():
     bot = Bot(token=TOKEN)

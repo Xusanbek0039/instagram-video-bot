@@ -26,8 +26,7 @@ async def send_startup_message():
             try:
                 await bot.send_message(
                     chat_id=user_id,
-                    text="🤖 *Bot qayta ishga tushdi!* \n"
-                         "Agar muammo bo'lsa, /start ni bosib qayta ishlating!",
+                    text="🤖 *Robot faol ishlamoqda foydalanish uchun iltimos Instagram Reels video havolasini yuboring!* \n",
                     parse_mode="Markdown"
                 )
                 print(f"✅Xabar yuborildi: {user_id}")
