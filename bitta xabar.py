@@ -10,7 +10,7 @@ load_dotenv()
 TOKEN = os.getenv("BOT_TOKEN")
 
 # Xabar yuboriladigan foydalanuvchi ID sini bu yerda kiriting
-USER_ID = "5626042722"  # <-- Bu yerga o'z foydalanuvchi ID'ingizni yozing
+USER_ID = "7618430844"  # <-- Bu yerga o'z foydalanuvchi ID'ingizni yozing
 
 async def send_message_to_user():
     bot = Bot(token=TOKEN)
@@ -18,8 +18,7 @@ async def send_message_to_user():
     try:
         await bot.send_message(
             chat_id=USER_ID,
-            text="🤖 *Bot qayta ishga tushdi!* \n"
-                 "Agar muammo bo'lsa, /start ni bosib qayta ishlating!\nHurmatli foydalanuvchi faol obunachi maqomi oldingiz hamda botdan foydalanish uchun 50 ta limit qolga kiritdingiz!",
+            text="Admin tomonidan yozilgan xabar\nInstagram havola yuboring men sizga video yuklashizga imkon beraman!",
             parse_mode="Markdown"
         )
         print(f"✅ Xabar yuborildi: {USER_ID}")
