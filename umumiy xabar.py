@@ -26,7 +26,7 @@ async def send_startup_message():
             try:
                 await bot.send_message(
                     chat_id=user_id,
-                    text="🤖 *Botimizdan faol foydalanganingiz uchun tashakkur!!! \nInstagram Reels video havolasini yuboring!* \n",
+                    text="🤖 *Botda rekanstruksiya ishlari olib borilmoqda!!!* \n",
                     parse_mode="Markdown"
                 )
                 print(f"✅Xabar yuborildi: {user_id}")
