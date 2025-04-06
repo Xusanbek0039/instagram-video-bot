@@ -1,4 +1,4 @@
-5626042722 mBin_Dev_0039 husanbek-coder.uz 20 2025-04-06
+5626042722 mBin_Dev_0039 husanbek-coder.uz -900 2025-04-06
 1830768060 Nomalum Mahliyo Suyunova 1 2025-03-02
 7694635937 Nomalum Xolmirzayeva 1 2025-03-02
 6489000250 Dr_muxtor_ov Mirkomil Muxtorov 1 2025-03-09
@@ -103,4 +103,4 @@
 5195257286 bibi_zaynab_muhammadzoda Usupjanova Maftuna 0 2025-03-31
 7285723085 financier0404 Shahzod O'ktamov 1 2025-04-04
 5376652018 F_Saydullayev 𝐅_𝐒𝐚𝐲𝐝𝐮𝐥𝐥𝐚𝐲𝐞𝐯 1 2025-04-05
-7815488796 Nomalum Husan 20 2025-04-05
+7815488796 Nomalum Husan 4 2025-04-06

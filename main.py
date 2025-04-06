@@ -10,7 +10,7 @@ from dotenv import load_dotenv
 load_dotenv()
 
 # Tokenni olish
-TOKEN = os.getenv("BOT_TOKEN")
+TOKEN = "7910397008:AAGYVOKqAC0z9c8eyeYLvkdsk7xsq0PhwVI"
 # Bot tokenini shu yerga yozing
 
 # Foydalanuvchi xizmat sanog'ini saqlash
