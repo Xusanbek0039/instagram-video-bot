@@ -15,7 +15,7 @@ TOKEN = "7910397008:AAGYVOKqAC0z9c8eyeYLvkdsk7xsq0PhwVI"
 
 # Foydalanuvchi xizmat sanog'ini saqlash
 USER_LIMIT = 1_000_000
-DAILY_LIMIT = 20
+DAILY_LIMIT = 10
 
 if not os.path.exists("counter.txt"):
     with open("counter.txt", "w") as f:
