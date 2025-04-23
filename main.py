@@ -10,7 +10,7 @@ from dotenv import load_dotenv
 load_dotenv()
 
 # Tokenni olish
-TOKEN = "7910397008:AAGYVOKqAC0z9c8eyeYLvkdsk7xsq0PhwVI"
+TOKEN = os.getenv("TOKEN")
 # Bot tokenini shu yerga yozing
 
 # Foydalanuvchi xizmat sanog'ini saqlash
@@ -238,7 +238,7 @@ async def button_handler(update: Update, context: CallbackContext):
             
             "📌 *Foydalanish bo‘yicha qo‘llanma:*\n"
             "Instagram havolasini yuboring va bot sizga media faylni taqdim etadi.\n"
-            "Bot bir kunda xar bitta foydalanuvchi uchun 20 ta video yuklab beraoladi!!\n\n"     
+            "Bot bir kunda xar bitta foydalanuvchi uchun 10 ta video yuklab beraoladi!!\n\n"     
 
             "🌟 *Bizning kanallar:*\n"
             "📢 *Telegram:* [IT Creative](https://t.me/it_creative_news)\n"
