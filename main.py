@@ -322,12 +322,13 @@ def get_statistics():
     today = datetime.now().date()
 
     # Umumiy foydalanuvchilarni hisoblash
-    if os.path.exists("user_limits.txt"):
+    if os.path.exists("log.txt"):
         try:
-            with open("user_limits.txt", "r", encoding="utf-8") as f:
-                total_users = sum(1 for _ in f)+total_users
+            with open("log.txt", "r", encoding="utf-8") as log_file:
+                start_count = sum(1 for line in log_file if "Start bosdi" in line)
+                total_users = start_count  # Faqat "Start bosdi" soniga teng bo'ladi
         except UnicodeDecodeError:
-            print("❌ Xatolik: `user_limits.txt` faylini UTF-8 formatida saqlang!")
+            print("❌ Xatolik: `log.txt` faylini UTF-8 formatida saqlang!")
 
     # Umumiy so‘rovlar sonini hisoblash
     if os.path.exists("counter.txt"):
