@@ -1,0 +1,547 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>IT Creative Code Academy</title>
+    <link rel="stylesheet" href="styles.css">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <link href="https://fonts.googleapis.com/css2?family=Roboto+Mono:wght@300;400;500;700&family=Poppins:wght@300;400;500;700&display=swap" rel="stylesheet">
+</head>
+<body class="dark-mode">
+    <div class="cursor"></div>
+    <div class="binary-background"></div>
+
+    <header>
+        <div class="logo">
+            <span class="bracket">{</span> IT Creative <span class="highlight">Code</span> Academy <span class="bracket">}</span>
+        </div>
+        <nav>
+            <ul>
+                <li><a href="#home" class="nav-link">Home</a></li>
+                <li><a href="#about" class="nav-link">About</a></li>
+                <li><a href="#courses" class="nav-link">Courses</a></li>
+                <li><a href="#instructors" class="nav-link">Instructors</a></li>
+                <li><a href="#testimonials" class="nav-link">Testimonials</a></li>
+                <li><a href="#faq" class="nav-link">FAQ</a></li>
+                <li><a href="#contact" class="nav-link cta-small">Contact</a></li>
+            </ul>
+            <!-- Theme toggle moved to navbar for mobile -->
+            <div class="theme-toggle">
+                <input type="checkbox" id="theme-switch">
+                <label for="theme-switch" class="toggle-label">
+                    <i class="fas fa-sun"></i>
+                    <i class="fas fa-moon"></i>
+                    <span class="toggle-ball"></span>
+                </label>
+            </div>
+            <div class="mobile-menu-btn">
+                <span></span>
+                <span></span>
+                <span></span>
+            </div>
+        </nav>
+    
+        <!-- Mobile Menu -->
+        <div class="mobile-menu">
+            <div class="mobile-menu-close">
+                <i class="fas fa-times"></i>
+            </div>
+            <div class="mobile-menu-bg">
+                <div class="mobile-menu-circle" style="width: 300px; height: 300px; top: 10%; left: 20%;"></div>
+                <div class="mobile-menu-circle" style="width: 200px; height: 200px; top: 60%; left: 70%;"></div>
+                <div class="mobile-menu-circle" style="width: 150px; height: 150px; top: 30%; left: 80%;"></div>
+            </div>
+            <div class="mobile-menu-links">
+                <a href="#home" class="mobile-menu-link">Home</a>
+                <a href="#about" class="mobile-menu-link">About</a>
+                <a href="#courses" class="mobile-menu-link">Courses</a>
+                <a href="#instructors" class="mobile-menu-link">Instructors</a>
+                <a href="#testimonials" class="mobile-menu-link">Testimonials</a>
+                <a href="#faq" class="mobile-menu-link">FAQ</a>
+                <a href="#contact" class="mobile-menu-link cta-small">Contact</a>
+            </div>
+        </div>
+    </header>
+
+    <main>
+        <!-- Hero Section -->
+        <section id="home" class="hero">
+            <div class="hero-content">
+                <div class="handwritten-text" id="handwritten-text">
+                    <div class="handwritten-row">IT Creative Code Academy</div>
+                </div>
+                <p class="subtitle">Where creativity meets technology</p>
+                <div class="terminal-container">
+                    <div class="terminal-header">
+                        <div class="terminal-buttons">
+                            <span class="terminal-btn close"></span>
+                            <span class="terminal-btn minimize"></span>
+                            <span class="terminal-btn maximize"></span>
+                        </div>
+                        <div class="terminal-title">terminal@itcreative:~</div>
+                    </div>
+                    <div class="terminal-body">
+                        <div class="line">
+                            <span class="prompt">$</span>
+                            <span class="command" id="terminal-text"></span>
+                            <span class="cursor">|</span>
+                        </div>
+                        <div id="terminal-output"></div>
+                    </div>
+                </div>
+                <div class="cta-container">
+                    <a href="#courses" class="cta-button">Start Coding Today</a>
+                    <a href="#about" class="cta-button outline">Learn More</a>
+                </div>
+            </div>
+        </section>
+
+        <!-- About Section -->
+        <section id="about" class="about">
+            <div class="section-header">
+                <h2>About <span class="highlight">Us</span></h2>
+                <div class="underline"></div>
+            </div>
+            <div class="about-content">
+                <div class="about-text">
+                    <p>IT Creative Code Academy is where innovation meets education. We're dedicated to transforming aspiring developers into industry-ready professionals through immersive, hands-on learning experiences.</p>
+                    <p>Our mission is to make coding accessible, engaging, and fun for everyone, regardless of their background or previous experience.</p>
+                </div>
+                <div class="about-cards">
+                    <div class="about-card">
+                        <div class="icon-container">
+                            <i class="fas fa-rocket"></i>
+                        </div>
+                        <h3>Accelerated Learning</h3>
+                        <p>Fast-track your coding journey with our intensive, results-driven curriculum.</p>
+                    </div>
+                    <div class="about-card">
+                        <div class="icon-container">
+                            <i class="fas fa-laptop-code"></i>
+                        </div>
+                        <h3>Practical Skills</h3>
+                        <p>Build real-world projects that showcase your abilities to potential employers.</p>
+                    </div>
+                    <div class="about-card">
+                        <div class="icon-container">
+                            <i class="fas fa-users"></i>
+                        </div>
+                        <h3>Community</h3>
+                        <p>Join a supportive network of learners, mentors, and industry professionals.</p>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- Courses Section -->
+        <section id="courses" class="courses">
+            <div class="section-header">
+                <h2>Our <span class="highlight">Courses</span></h2>
+                <div class="underline"></div>
+            </div>
+            <div class="courses-grid">
+                <div class="course-card">
+                    <div class="course-icon"><i class="fab fa-html5"></i></div>
+                    <h3>HTML & CSS</h3>
+                    <p>Master the fundamentals of web development with modern HTML5 and CSS3.</p>
+                    <div class="course-details">
+                        <span><i class="fas fa-clock"></i> 8 Weeks</span>
+                        <span><i class="fas fa-signal"></i> Beginner</span>
+                    </div>
+                    <a href="#" class="course-btn">Learn More</a>
+                </div>
+                <div class="course-card">
+                    <div class="course-icon"><i class="fab fa-js"></i></div>
+                    <h3>JavaScript</h3>
+                    <p>Build interactive web applications with modern JavaScript (ES6+).</p>
+                    <div class="course-details">
+                        <span><i class="fas fa-clock"></i> 10 Weeks</span>
+                        <span><i class="fas fa-signal"></i> Intermediate</span>
+                    </div>
+                    <a href="#" class="course-btn">Learn More</a>
+                </div>
+                <div class="course-card">
+                    <div class="course-icon"><i class="fab fa-python"></i></div>
+                    <h3>Python</h3>
+                    <p>Learn Python for web development, data science, and automation.</p>
+                    <div class="course-details">
+                        <span><i class="fas fa-clock"></i> 12 Weeks</span>
+                        <span><i class="fas fa-signal"></i> All Levels</span>
+                    </div>
+                    <a href="#" class="course-btn">Learn More</a>
+                </div>
+                <div class="course-card">
+                    <div class="course-icon"><i class="fab fa-react"></i></div>
+                    <h3>React.js</h3>
+                    <p>Create modern user interfaces with the popular React library.</p>
+                    <div class="course-details">
+                        <span><i class="fas fa-clock"></i> 10 Weeks</span>
+                        <span><i class="fas fa-signal"></i> Intermediate</span>
+                    </div>
+                    <a href="#" class="course-btn">Learn More</a>
+                </div>
+                <div class="course-card">
+                    <div class="course-icon"><i class="fas fa-database"></i></div>
+                    <h3>SQL & Databases</h3>
+                    <p>Learn database design, SQL, and data management principles.</p>
+                    <div class="course-details">
+                        <span><i class="fas fa-clock"></i> 8 Weeks</span>
+                        <span><i class="fas fa-signal"></i> Intermediate</span>
+                    </div>
+                    <a href="#" class="course-btn">Learn More</a>
+                </div>
+                <div class="course-card">
+                    <div class="course-icon"><i class="fab fa-node-js"></i></div>
+                    <h3>Node.js</h3>
+                    <p>Build scalable backend applications with JavaScript and Node.js.</p>
+                    <div class="course-details">
+                        <span><i class="fas fa-clock"></i> 10 Weeks</span>
+                        <span><i class="fas fa-signal"></i> Advanced</span>
+                    </div>
+                    <a href="#" class="course-btn">Learn More</a>
+                </div>
+            </div>
+        </section>
+
+        <!-- Why Choose Us Section -->
+        <section id="why-us" class="why-us">
+            <div class="section-header">
+                <h2>Why <span class="highlight">Choose Us</span></h2>
+                <div class="underline"></div>
+            </div>
+            <div class="features-container">
+                <div class="feature">
+                    <div class="feature-icon">
+                        <i class="fas fa-hands-on"></i>
+                    </div>
+                    <h3>Hands-on Practice</h3>
+                    <p>Learn by doing with practical exercises and real-world projects that reinforce your skills.</p>
+                </div>
+                <div class="feature">
+                    <div class="feature-icon">
+                        <i class="fas fa-project-diagram"></i>
+                    </div>
+                    <h3>Real Projects</h3>
+                    <p>Build a portfolio of impressive projects that demonstrate your abilities to employers.</p>
+                </div>
+                <div class="feature">
+                    <div class="feature-icon">
+                        <i class="fas fa-chalkboard-teacher"></i>
+                    </div>
+                    <h3>Expert Mentorship</h3>
+                    <p>Get guidance from industry professionals who provide personalized feedback and support.</p>
+                </div>
+                <div class="feature">
+                    <div class="feature-icon">
+                        <i class="fas fa-users-cog"></i>
+                    </div>
+                    <h3>Collaborative Learning</h3>
+                    <p>Work with peers on team projects that simulate real development environments.</p>
+                </div>
+            </div>
+        </section>
+
+        <!-- Instructors Section -->
+        <section id="instructors" class="instructors">
+            <div class="section-header">
+                <h2>Our <span class="highlight">Instructors</span></h2>
+                <div class="underline"></div>
+            </div>
+            <div class="instructors-grid">
+                <div class="instructor-card">
+                    <div class="instructor-image">
+                        <img src="https://images.unsplash.com/photo-1560250097-0b93528c311a?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&w=300&q=80" alt="Alex Johnson">
+                        <div class="social-links">
+                            <a href="#"><i class="fab fa-linkedin"></i></a>
+                            <a href="#"><i class="fab fa-github"></i></a>
+                            <a href="#"><i class="fab fa-twitter"></i></a>
+                        </div>
+                    </div>
+                    <h3>Alex Johnson</h3>
+                    <p class="instructor-title">Frontend Specialist</p>
+                    <p class="instructor-bio">10+ years of experience in web development with a focus on creating beautiful, responsive interfaces.</p>
+                </div>
+                <div class="instructor-card">
+                    <div class="instructor-image">
+                        <img src="https://images.unsplash.com/photo-1573496359142-b8d87734a5a2?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&w=300&q=80" alt="Sarah Chen">
+                        <div class="social-links">
+                            <a href="#"><i class="fab fa-linkedin"></i></a>
+                            <a href="#"><i class="fab fa-github"></i></a>
+                            <a href="#"><i class="fab fa-twitter"></i></a>
+                        </div>
+                    </div>
+                    <h3>Sarah Chen</h3>
+                    <p class="instructor-title">Full Stack Developer</p>
+                    <p class="instructor-bio">Former Google engineer with expertise in scalable applications and modern JavaScript frameworks.</p>
+                </div>
+                <div class="instructor-card">
+                    <div class="instructor-image">
+                        <img src="https://images.unsplash.com/photo-1566492031773-4f4e44671857?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&w=300&q=80" alt="Michael Rodriguez">
+                        <div class="social-links">
+                            <a href="#"><i class="fab fa-linkedin"></i></a>
+                            <a href="#"><i class="fab fa-github"></i></a>
+                            <a href="#"><i class="fab fa-twitter"></i></a>
+                        </div>
+                    </div>
+                    <h3>Michael Rodriguez</h3>
+                    <p class="instructor-title">Backend Specialist</p>
+                    <p class="instructor-bio">Database expert with a passion for optimizing performance and teaching best practices.</p>
+                </div>
+                <div class="instructor-card">
+                    <div class="instructor-image">
+                        <img src="https://images.unsplash.com/photo-1580894732444-8ecded7900cd?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&w=300&q=80" alt="Priya Patel">
+                        <div class="social-links">
+                            <a href="#"><i class="fab fa-linkedin"></i></a>
+                            <a href="#"><i class="fab fa-github"></i></a>
+                            <a href="#"><i class="fab fa-twitter"></i></a>
+                        </div>
+                    </div>
+                    <h3>Priya Patel</h3>
+                    <p class="instructor-title">UX/UI & Frontend</p>
+                    <p class="instructor-bio">Award-winning designer who bridges the gap between beautiful design and functional code.</p>
+                </div>
+            </div>
+        </section>
+
+        <!-- Testimonials Section -->
+        <section id="testimonials" class="testimonials">
+            <div class="section-header">
+                <h2>Student <span class="highlight">Testimonials</span></h2>
+                <div class="underline"></div>
+            </div>
+            <div class="testimonial-slider">
+                <div class="testimonial-container">
+                    <div class="testimonial active">
+                        <div class="quote"><i class="fas fa-quote-left"></i></div>
+                        <p>The hands-on approach at IT Creative Code Academy transformed me from a complete beginner to a confident developer in just months. I landed my dream job right after graduation!</p>
+                        <div class="testimonial-author">
+                            <img src="https://images.unsplash.com/photo-1507003211169-0a1dd7228f2d?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&w=80&h=80&q=80" alt="David Kim">
+                            <div>
+                                <h4>David Kim</h4>
+                                <p>Frontend Developer at TechCorp</p>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="testimonial">
+                        <div class="quote"><i class="fas fa-quote-left"></i></div>
+                        <p>The instructors don't just teach you to code; they mentor you to think like a developer. The projects we built are the highlight of my portfolio and impressed every interviewer.</p>
+                        <div class="testimonial-author">
+                            <img src="https://images.unsplash.com/photo-1494790108377-be9c29b29330?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&w=80&h=80&q=80" alt="Emma Wilson">
+                            <div>
+                                <h4>Emma Wilson</h4>
+                                <p>Full Stack Developer at StartupX</p>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="testimonial">
+                        <div class="quote"><i class="fas fa-quote-left"></i></div>
+                        <p>As someone switching careers, I was worried about keeping up. The supportive community and step-by-step curriculum made the transition smooth and enjoyable.</p>
+                        <div class="testimonial-author">
+                            <img src="https://images.unsplash.com/photo-1500648767791-00dcc994a43e?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&w=80&h=80&q=80" alt="James Taylor">
+                            <div>
+                                <h4>James Taylor</h4>
+                                <p>Backend Developer at DataSystems</p>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                <div class="testimonial-controls">
+                    <button class="prev-btn"><i class="fas fa-chevron-left"></i></button>
+                    <div class="testimonial-dots">
+                        <span class="dot active" data-index="0"></span>
+                        <span class="dot" data-index="1"></span>
+                        <span class="dot" data-index="2"></span>
+                    </div>
+                    <button class="next-btn"><i class="fas fa-chevron-right"></i></button>
+                </div>
+            </div>
+        </section>
+
+        <!-- FAQ Section -->
+        <section id="faq" class="faq">
+            <div class="section-header">
+                <h2>Frequently Asked <span class="highlight">Questions</span></h2>
+                <div class="underline"></div>
+            </div>
+            <div class="faq-container">
+                <div class="faq-item">
+                    <div class="faq-question">
+                        <h3>Do I need prior coding experience?</h3>
+                        <span class="faq-toggle"><i class="fas fa-plus"></i></span>
+                    </div>
+                    <div class="faq-answer">
+                        <p>No prior experience is required for our beginner courses. We start from the fundamentals and gradually build your skills. For intermediate and advanced courses, we recommend having the prerequisite knowledge.</p>
+                    </div>
+                </div>
+                <div class="faq-item">
+                    <div class="faq-question">
+                        <h3>What is the class schedule like?</h3>
+                        <span class="faq-toggle"><i class="fas fa-plus"></i></span>
+                    </div>
+                    <div class="faq-answer">
+                        <p>We offer flexible scheduling with both part-time (evenings and weekends) and full-time immersive options. Most courses include 2-3 live sessions per week plus self-paced assignments.</p>
+                    </div>
+                </div>
+                <div class="faq-item">
+                    <div class="faq-question">
+                        <h3>Do you offer job placement assistance?</h3>
+                        <span class="faq-toggle"><i class="fas fa-plus"></i></span>
+                    </div>
+                    <div class="faq-answer">
+                        <p>Yes! Our career services include resume reviews, interview preparation, portfolio development, and connections with our hiring partners. We're committed to helping you launch your tech career.</p>
+                    </div>
+                </div>
+                <div class="faq-item">
+                    <div class="faq-question">
+                        <h3>Can I pay in installments?</h3>
+                        <span class="faq-toggle"><i class="fas fa-plus"></i></span>
+                    </div>
+                    <div class="faq-answer">
+                        <p>Absolutely. We offer various payment plans including monthly installments. We also have scholarships available for qualified applicants. Contact our admissions team for details.</p>
+                    </div>
+                </div>
+                <div class="faq-item">
+                    <div class="faq-question">
+                        <h3>What kind of projects will I build?</h3>
+                        <span class="faq-toggle"><i class="fas fa-plus"></i></span>
+                    </div>
+                    <div class="faq-answer">
+                        <p>You'll build real-world projects ranging from personal websites to full-stack applications. By the end of your course, you'll have a professional portfolio showcasing your skills to potential employers.</p>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- Contact Section -->
+        <section id="contact" class="contact">
+            <div class="section-header">
+                <h2>Get in <span class="highlight">Touch</span></h2>
+                <div class="underline"></div>
+            </div>
+            <div class="contact-container">
+                <div class="contact-info">
+                    <h3>Ready to start your coding journey?</h3>
+                    <p>Fill out the form or contact us directly using the information below.</p>
+                    <div class="info-item">
+                        <i class="fas fa-map-marker-alt"></i>
+                        <p>123 Tech Street, Innovation City, TC 10101</p>
+                    </div>
+                    <div class="info-item">
+                        <i class="fas fa-phone"></i>
+                        <p>(555) 123-4567</p>
+                    </div>
+                    <div class="info-item">
+                        <i class="fas fa-envelope"></i>
+                        <p>info@itcreativecode.com</p>
+                    </div>
+                    <div class="social-links">
+                        <a href="#"><i class="fab fa-facebook"></i></a>
+                        <a href="#"><i class="fab fa-twitter"></i></a>
+                        <a href="#"><i class="fab fa-instagram"></i></a>
+                        <a href="#"><i class="fab fa-linkedin"></i></a>
+                        <a href="#"><i class="fab fa-github"></i></a>
+                    </div>
+                </div>
+                <div class="contact-form">
+                    <form id="signup-form">
+                        <div class="form-group">
+                            <div class="input-container">
+                                <input type="text" id="name" required>
+                                <label for="name">Full Name</label>
+                                <i class="fas fa-user"></i>
+                            </div>
+                        </div>
+                        <div class="form-group">
+                            <div class="input-container">
+                                <input type="email" id="email" required>
+                                <label for="email">Email Address</label>
+                                <i class="fas fa-envelope"></i>
+                            </div>
+                        </div>
+                        <div class="form-group">
+                            <div class="input-container">
+                                <input type="tel" id="phone" required>
+                                <label for="phone">Phone Number</label>
+                                <i class="fas fa-phone"></i>
+                            </div>
+                        </div>
+                        <div class="form-group">
+                            <div class="input-container">
+                                <select id="course" required>
+                                    <option value="" disabled selected>Select a Course</option>
+                                    <option value="html-css">HTML & CSS</option>
+                                    <option value="javascript">JavaScript</option>
+                                    <option value="python">Python</option>
+                                    <option value="react">React.js</option>
+                                    <option value="sql">SQL & Databases</option>
+                                    <option value="nodejs">Node.js</option>
+                                </select>
+                                <label for="course">Interested Course</label>
+                                <i class="fas fa-laptop-code"></i>
+                            </div>
+                        </div>
+                        <div class="form-group">
+                            <div class="input-container textarea">
+                                <textarea id="message" required></textarea>
+                                <label for="message">Your Message</label>
+                                <i class="fas fa-comment"></i>
+                            </div>
+                        </div>
+                        <button type="submit" class="submit-btn">
+                            <span>Submit</span>
+                            <i class="fas fa-paper-plane"></i>
+                        </button>
+                    </form>
+                </div>
+            </div>
+        </section>
+    </main>
+
+    <footer>
+        <div class="footer-content">
+            <div class="footer-logo">
+                <span class="bracket">{</span> IT Creative <span class="highlight">Code</span> Academy <span class="bracket">}</span>
+                <p>Transforming beginners into coding professionals</p>
+            </div>
+            <div class="footer-links">
+                <div class="footer-column">
+                    <h4>Quick Links</h4>
+                    <ul>
+                        <li><a href="#home">Home</a></li>
+                        <li><a href="#about">About Us</a></li>
+                        <li><a href="#courses">Courses</a></li>
+                        <li><a href="#instructors">Instructors</a></li>
+                    </ul>
+                </div>
+                <div class="footer-column">
+                    <h4>Resources</h4>
+                    <ul>
+                        <li><a href="#">Blog</a></li>
+                        <li><a href="#">Tutorials</a></li>
+                        <li><a href="#">Free Resources</a></li>
+                        <li><a href="#">Career Guide</a></li>
+                    </ul>
+                </div>
+                <div class="footer-column">
+                    <h4>Legal</h4>
+                    <ul>
+                        <li><a href="#">Privacy Policy</a></li>
+                        <li><a href="#">Terms of Service</a></li>
+                        <li><a href="#">Cookie Policy</a></li>
+                        <li><a href="#">Refund Policy</a></li>
+                    </ul>
+                </div>
+            </div>
+        </div>
+        <div class="footer-bottom">
+            <p>&copy; 2023 IT Creative Code Academy. All rights reserved.</p>
+            <p>Designed with <i class="fas fa-heart"></i> by Creative Coders</p>
+        </div>
+    </footer>
+
+    <script src="main.js"></script>
+    <script src="terminal.js"></script>
+    <script src="animations.js"></script>
+</body>
+</html>
