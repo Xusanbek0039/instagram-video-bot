@@ -1,4 +1,0 @@
-python-telegram-bot==20.3
-requests==2.31.0
-instaloader==4.10
-python-dotenv==1.0.0
