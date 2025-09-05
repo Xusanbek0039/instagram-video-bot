@@ -5,17 +5,11 @@ from telegram import Update, InlineKeyboardButton, InlineKeyboardMarkup
 from telegram.ext import ApplicationBuilder, CommandHandler, MessageHandler, CallbackQueryHandler, filters, CallbackContext
 from datetime import datetime
 from dotenv import load_dotenv
-
-# .env faylni yuklash
 load_dotenv()
 
-ADMIN_ID = 5626042722  # O'zingning Telegram ID'ingni shu yerga yoz
-
-# TOKENni olish
+ADMIN_ID = os.getenv("ADMIN")  # O'zingning Telegram ID'ingni shu yerga yoz
 TOKEN = os.getenv("TELEGRAM_TOKEN")# Bot tokenini shu yerga yozing
-
-# Foydalanuvchi xizmat sanog'ini saqlash
-USER_LIMIT = 1_000_000
+USER_LIMIT = 100000
 DAILY_LIMIT = 10
 async def limit_berish(update: Update, context: CallbackContext):
     user = update.message.from_user
@@ -33,8 +27,6 @@ async def limit_berish(update: Update, context: CallbackContext):
         
         user_id = int(args[0])
         qoshimcha_limit = int(args[1])
-        
-        # Limitni faylda yangilaymiz
         today = datetime.now().date()
         user_limits = {}
 
@@ -302,7 +294,7 @@ async def button_handler(update: Update, context: CallbackContext):
             "📺 *YouTube:* [IT Creative](https://www.youtube.com/@it_creative)\n\n"
             
             "👨‍💻 *Admin bilan bog‘lanish:*\n"
-            "🔹 [@mBin_Dev_0039](https://t.me/mBin_Dev_0039)\n"
+            "🔹 [@husanbek_coder](https://t.me/husanbek_coder)\n"
             "☎️ *Telefon:* +998 97 521 66 86",
             parse_mode="Markdown"
         )
@@ -310,7 +302,7 @@ async def button_handler(update: Update, context: CallbackContext):
     elif query.data == "admin":
         await query.message.reply_text(
             "📩 *Admin bilan bog‘lanish:*\n\n"
-            "👨‍💻 *Telegram:* [@mBin_Dev_0039](https://t.me/mBin_Dev_0039)\n"
+            "👨‍💻 *Telegram:* [@husanbek_coder](https://t.me/husanbek_coder)\n"
             "☎️ *Telefon:* +998 97 521 66 86\n\n"
             "❓ Agar bot ishlamayotgan bo‘lsa yoki savollaringiz bo‘lsa, bemalol yozing.\n\n"
             "🔄 *🤖Botni qayta ishga tushurish uchun:* /start",
@@ -319,9 +311,6 @@ async def button_handler(update: Update, context: CallbackContext):
     elif query.data == "statistika":
         await statistikani_korsat(update, context)  # Statistika funktsiyasini chaqirish
     print(f"🔘Inline tugma bosildi: {query.data} | 👤Foydalanuvchi : {user.first_name} ID ({user.id})")  # Debug uchun
-
-
-
 
 
 async def handle_message(update: Update, context: CallbackContext):
@@ -343,7 +332,7 @@ async def handle_message(update: Update, context: CallbackContext):
         await update.message.reply_text("His tuyg'ularga berilmang!\nHavola yuboring!")
         return
     elif any(word in text.lower() for word in ["admin"]):
-        await update.message.reply_text("Admin bilan bog'lanish uchun:\n@mBin_Dev_0039 telegram manzil\n+998 97 521 66 86 A'loqa raqami orqali\nBog'lanishingiz mumkin.\n🤖Botni qayta ishga tushurish uchun /start")
+        await update.message.reply_text("Admin bilan bog'lanish uchun:\n@husanbek_coder telegram manzil\n+998 97 521 66 86 A'loqa raqami orqali\nBog'lanishingiz mumkin.\n🤖Botni qayta ishga tushurish uchun /start")
         return
     if "instagram.com" in text:
         used_limit, remaining_limit = check_user_limit(user.id, user.username, user.first_name, user.last_name)
